@@ -23,7 +23,6 @@ namespace Lecture4
 
 		private MyQueueNode last = null;
 
-
 		public void Enqueue(T item)
 		{
 			MyQueueNode node = new MyQueueNode(item, null);
@@ -67,5 +66,84 @@ namespace Lecture4
 		{
 			return first == null;
 		}
-	}
+
+
+
+        #region MyFunctions
+		public int Count()
+        {
+			int num = 0;
+			MyQueueNode node = first;
+			while(node != null)
+            {
+				node = node.Next;
+				num++;
+            }
+			return num;
+        }
+
+		public void Clear()
+        {
+			if (first == null) return;
+
+			while(first.Next != null)
+            {
+				first = first.Next;
+			}
+			first = null;
+			last = null;
+        }
+		
+		public void Clear(bool collect)
+        {
+			if (first == null) return;
+
+			while(first.Next != null)
+            {
+				first = first.Next;
+			}
+			first = null;
+			last = null;
+
+			if (collect) GC.Collect();
+        }
+
+
+		public void Reverse()		//actually works for queues ranging from 1 to many elements
+        {
+			if (first == null || first.Next == null) return;
+
+            //MyQueueNode test1 = last, test2 = first;
+            MyQueueNode node1 = null, node2 = first, node3 = first.Next;
+			last = first;
+			while(node2 != null) 
+			{ 
+				//Console.WriteLine("Before {0} {1} {2}", node1.Item, node2.Item, node3.Item);
+				node3 = node2.Next;
+				node2.Next = node1;
+				node1 = node2;
+				node2 = node3;
+				//Console.WriteLine("After {0} {1} {2}", node1.Item, node2.Item, node3.Item);
+			}	//exits with lastNode; null; null
+            first = node1;
+
+            //Console.WriteLine(test1.GetHashCode().Equals(first.GetHashCode()));
+            //Console.WriteLine(test2.GetHashCode().Equals(last.GetHashCode())); //was to ensure, that the objects are the same
+		}
+
+
+		public bool Contains(T searchItem)
+        {
+			MyQueueNode searchNode = first;
+			while(searchNode != null)
+            {
+				if(searchNode.Item.Equals(searchItem)) return true;
+				searchNode = searchNode.Next;
+            }
+			return false;
+        }
+
+        #endregion
+
+    }
 }

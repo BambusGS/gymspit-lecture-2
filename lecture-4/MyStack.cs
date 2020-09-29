@@ -54,5 +54,55 @@ namespace Lecture4
 		{
 			return !(count > 0);
 		}
-	}
+
+
+		#region MyChanges
+		public int Count() => count;    
+
+		/// <summary>
+		/// Clear method
+		/// </summary>
+
+		public void Clear()
+        {
+			count = 0;
+			capacity = INITIAL_CAPACITY;
+			items = new T[INITIAL_CAPACITY];
+        }
+
+		/// <summary>
+		/// Clear method with boolean specificator whether to garbage collect right after stack reset
+		/// </summary>
+		public void Clear(bool collector)
+        {
+			count = 0;
+			capacity = INITIAL_CAPACITY;
+			items = new T[INITIAL_CAPACITY];
+			if (collector) { GC.Collect(); }
+		}
+
+		public void Reverse()
+        {
+			if (count < 1) return;					//don't reverse a one-long stack
+            for (int i = 0; i < count / 2; i++)
+            {
+				T temp = items[i];
+				items[i] = items[count-1 - i];		//when COUNT is 1, there is one element, so it starts at 0 and ends at COUNT-1
+				items[count-1 - i] = temp;
+			}
+        }
+
+		public bool Contains(T searchItem)
+        {
+            for (int i = 0; i < count; i++)
+            {
+				if(items[i].Equals(searchItem)) { return true; }
+            }
+			return false;
+        }
+
+
+
+        #endregion
+    }
 }
