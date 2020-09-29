@@ -54,11 +54,19 @@ namespace Lecture4
             Console.WriteLine("Queue (100-119) peek before: {0}", queue.Peek());
             Console.WriteLine("Queue (100-119) length: {0}", queue.Count());
             //queue.Clear();
+
+            Console.WriteLine("Queue (100-119) contains 99: {0}", queue.Contains(99));
+            Console.WriteLine("Queue (100-119) contains 100: {0}", queue.Contains(100));
+            Console.WriteLine("Queue (100-119) contains 119: {0}", queue.Contains(119));
+            Console.WriteLine("Queue (100-119) contains 120: {0}", queue.Contains(120));
+            
             queue.Reverse();
             while (!queue.IsEmpty())
             {
                 Console.WriteLine(queue.Dequeue());
             }
+
+
 
             Console.Write("\n------------------\n");
 

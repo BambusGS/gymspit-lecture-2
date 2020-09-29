@@ -131,6 +131,18 @@ namespace Lecture4
             //Console.WriteLine(test2.GetHashCode().Equals(last.GetHashCode())); //was to ensure, that the objects are the same
 		}
 
+
+		public bool Contains(T searchItem)
+        {
+			MyQueueNode searchNode = first;
+			while(searchNode != null)
+            {
+				if(searchNode.Item.Equals(searchItem)) return true;
+				searchNode = searchNode.Next;
+            }
+			return false;
+        }
+
         #endregion
 
     }
